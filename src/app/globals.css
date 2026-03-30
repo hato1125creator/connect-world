@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-fantasy-bg: #FDFCF5;
+  --color-fantasy-text: #4A3B2A;
+  --color-fantasy-accent: #D4AF37;
+  --color-magic: #8A2BE2;
+  --color-adventure: #228B22;
+  --color-fairy-tale: #ff6b6b;
+  --font-serif: var(--font-noto-serif-jp), serif;
+}
+
+body {
+  background: var(--color-fantasy-bg);
+  color: var(--color-fantasy-text);
+}
