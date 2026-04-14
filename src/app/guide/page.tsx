@@ -5,7 +5,7 @@ import { MapPin, Clock, AlertTriangle, ScrollText, CheckCircle2, User, Users } f
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function GuidePage() {
-  const [activeTab, setActiveTab] = useState<'resident' | 'traveler'>('resident');
+  const [activeTab, setActiveTab] = useState<'resident' | 'traveler'>('traveler'); // 初期タブを外部向けに変更
 
   return (
     <main className="min-h-screen bg-fantasy-bg pt-24 pb-32 md:pb-24 px-4 md:px-8">
@@ -25,7 +25,6 @@ export default function GuidePage() {
 
         {/* 招待状（開催概要） */}
         <section className="relative bg-white border-2 border-fantasy-accent p-8 md:p-12 rounded-lg shadow-xl">
-          {/* 四隅の装飾 */}
           <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-fantasy-accent rounded-tl-lg -translate-x-1 -translate-y-1" />
           <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-fantasy-accent rounded-tr-lg translate-x-1 -translate-y-1" />
           <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-fantasy-accent rounded-bl-lg -translate-x-1 translate-y-1" />
@@ -40,8 +39,12 @@ export default function GuidePage() {
               <span className="flex items-center gap-2 text-fantasy-accent font-bold text-lg mb-2">
                 <Clock size={20} /> 開門の刻（日時）
               </span>
-              <p>第1日: 2026年 9月10日（木） 09:00 - 15:30</p>
-              <p>第2日: 2026年 9月11日（金） 09:00 - 15:00</p>
+              <p>第1日（関係者公開）: <br/>2026年 7月17日（金）</p>
+              <p>第2日（一般公開）: <br/>2026年 7月18日（土）</p>
+              <div className="mt-2 pt-2 border-t border-fantasy-text/20">
+                <p className="text-xl font-bold">09:30 - 14:00</p>
+                <p className="text-sm text-fantasy-text/70 mt-1">※両日とも最終入場（受付）は 13:30 までとなります</p>
+              </div>
             </div>
             
             <div className="flex flex-col gap-2 p-6 bg-fantasy-bg/50 rounded-md border border-fantasy-text/10">
@@ -49,7 +52,7 @@ export default function GuidePage() {
                 <MapPin size={20} /> 舞台（アクセス）
               </span>
               <p>私立 梨花高等学校（校内全域）</p>
-              <p className="text-sm text-fantasy-text/70 mt-2">※ 魔法の絨毯や空飛ぶほうき（自転車・自動車）でのご来場はご遠慮ください。公共交通機関をご利用願います。</p>
+              <p className="text-sm text-fantasy-text/70 mt-2">※ 鉄の馬や魔法の絨毯（自転車・自動車）でのご来場は固く禁じております。公共交通機関をご利用願います。</p>
             </div>
           </div>
         </section>
@@ -64,49 +67,48 @@ export default function GuidePage() {
           <div className="flex justify-center mb-8">
             <div className="bg-fantasy-bg p-1 rounded-full border-2 border-fantasy-accent/30 inline-flex shadow-inner">
               <button
-                onClick={() => setActiveTab('resident')}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 ${activeTab === 'resident' ? 'bg-fantasy-accent text-white shadow-md' : 'text-fantasy-text/60 hover:text-fantasy-text'}`}
-              >
-                <User size={18} /> 住人向け（生徒）
-              </button>
-              <button
                 onClick={() => setActiveTab('traveler')}
                 className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 ${activeTab === 'traveler' ? 'bg-fantasy-accent text-white shadow-md' : 'text-fantasy-text/60 hover:text-fantasy-text'}`}
               >
                 <Users size={18} /> 旅人向け（来客）
+              </button>
+              <button
+                onClick={() => setActiveTab('resident')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 ${activeTab === 'resident' ? 'bg-fantasy-accent text-white shadow-md' : 'text-fantasy-text/60 hover:text-fantasy-text'}`}
+              >
+                <User size={18} /> 住人向け（生徒）
               </button>
             </div>
           </div>
 
           <div className="relative min-h-[250px] overflow-hidden">
             <AnimatePresence mode="wait">
-              {activeTab === 'resident' ? (
+              {activeTab === 'traveler' ? (
                 <motion.div
-                  key="resident"
+                  key="traveler"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   className="space-y-4"
                 >
-                  <RuleItem text="コネクトワールドの住人として、旅人をあたたかくおもてなしすること。" />
-                  <RuleItem text="各セクターの準備期間中における魔法（機材）の持ち出しには、ギルドマスター（担当教員）の許可を得ること。" />
-                  <RuleItem text="シフト中は責任を持って役目を果たし、無断での持ち場離脱は固く禁ず。" />
-                  <RuleItem text="終了の鐘（下校時刻）が鳴るまでに、必ず自陣の清掃・現状復帰を完了させること。" />
+                  <RuleItem text="魔法の板（スマートフォン）は、写真や動画の撮影、連絡、および当サイトや公式SNSの閲覧にのみご使用いただけます。" />
+                  <RuleItem text="お食事は「各飲食団体の活動教室」または「コモンホール」の指定エリアにてお楽しみください。" />
+                  <RuleItem text="歩行中の撮影や、通路を塞いでの長時間の滞在は、他の冒険者の妨げとなるためご遠慮ください。" />
+                  <RuleItem text="ゴミは所定の分別ダストボックス（魔法陣）へ魔力と共に正確に投棄してください。" />
                 </motion.div>
               ) : (
                 <motion.div
-                  key="traveler"
+                  key="resident"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                   className="space-y-4"
                 >
-                  <RuleItem text="通行の妨げとなる場所での荷物の放置や、長時間の立ち話（撮影）はご遠慮ください。" />
-                  <RuleItem text="危険な魔法呪文（火気や危険物）のご使用およびお持ち込みは厳禁となっております。" />
-                  <RuleItem text="写真撮影が許可されているエリア以外での撮影、及び住人（生徒）や他の旅人の無断撮影はお控えください。" />
-                  <RuleItem text="ゴミは所定の分別ダストボックス（魔法陣）へ魔力と共に正確に投棄してください。" />
+                  <RuleItem text="コネクトワールドの住人として、旅人をあたたかくおもてなしすること。" />
+                  <RuleItem text="シフト中は責任を持って役目を果たし、無断での持ち場離脱は固く禁ず。" />
+                  <RuleItem text="終了の鐘（14:15下校時刻）が鳴るまでに、必ず自陣の清掃・現状復帰を完了させること。" />
                 </motion.div>
                )}
             </AnimatePresence>
@@ -123,7 +125,6 @@ export default function GuidePage() {
           </p>
           
           <div className="relative w-full aspect-square md:aspect-video rounded-md overflow-hidden bg-fantasy-bg/50 border-4 border-double border-fantasy-accent flex items-center justify-center group cursor-pointer hover:shadow-xl transition-all">
-            {/* ダミーのマップイメージ（本来はアップロードした画像を使用） */}
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1588666305190-482f1eb82855?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-multiply transition-transform duration-700 group-hover:scale-105" />
             <div className="relative z-10 bg-white/80 backdrop-blur-sm px-8 py-4 rounded shadow-lg border border-fantasy-accent/50 text-center">
               <MapPin size={32} className="mx-auto mb-2 text-fantasy-text" />
